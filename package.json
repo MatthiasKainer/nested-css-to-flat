@@ -1,0 +1,27 @@
+{
+  "name": "nested-css-to-flat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "author": "Matthias Kainer",
+  "license": "MIT",
+  "devDependencies": {
+    "buble": "^0.20.0",
+    "buble-jest": "^1.0.1",
+    "jest": "^27.5.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "buble-jest"
+    },
+    "testEnvironment": "jsdom"
+  },
+  "bin": {
+    "nested-css-to-flat": "./main.js"
+  }
+}
