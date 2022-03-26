@@ -27,6 +27,35 @@ const nestedCss =  `
 const flatCss = transform(nestedCss)
 ```
 
+With [lit](https://lit.dev)
+
+```js
+import {html} from "lit"
+import {css} from "nested-css-to-flat/lit-css"
+import {pureLit} from "pure-lit"
+
+pureLit("my-element", () => html`
+    <main>
+        <p>Hello World!</p>
+    </main>
+    <footer> 
+        <p>Copyright by me</p>
+    </footer>
+`, {
+    styles: css`
+    p {
+        font-size: 1rem;
+    }
+    footer {
+        background:black;
+        & p {
+            font-size: 0.75rem;
+        }
+    }
+    `
+})
+```
+
 ## What it supports
 
 A CSS
