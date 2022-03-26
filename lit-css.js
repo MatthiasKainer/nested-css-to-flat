@@ -6,7 +6,6 @@ function toString(string, ...tags) {
     for (let i = 0; i < tags.length; i++) {
       str += tags[i] + string[i + 1];
     }
-    console.log(transform(str))
     return transform(str);
   }
 
