@@ -6,6 +6,7 @@
   "module": "src/index.js",
   "type": "module",
   "scripts": {
+    "build:docs": "cd playground && npm run build:docs",
     "test": "jest --coverage"
   },
   "author": "Matthias Kainer",
