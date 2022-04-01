@@ -7,6 +7,10 @@ Simple tranformation following the specs from [https://www.w3.org/TR/css-nesting
 
 It is not following Sass/LESS/similar Syntax, transformation from this languages will not lead to the expected results
 
+## Playground
+
+You can use this online without installing anything by opening [https://matthiaskainer.github.io/nested-css-to-flat/](https://matthiaskainer.github.io/nested-css-to-flat/)
+
 ## Usage
 
 As cli
