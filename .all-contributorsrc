@@ -6,6 +6,15 @@
   "commit": false,
   "contributors": [
     {
+      "login": "MatthiasKainer",
+      "name": "Matthias Kainer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2781095?v=4",
+      "profile": "https://matthias-kainer.de/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "eliutdev",
       "name": "R. Eliut",
       "avatar_url": "https://avatars.githubusercontent.com/u/63687573?v=4",
@@ -22,5 +31,6 @@
   "projectOwner": "MatthiasKainer",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "none"
 }
