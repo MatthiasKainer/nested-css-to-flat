@@ -85,7 +85,7 @@ menu {
 }
 table.colortable, table.stripe {
     color: black;
-    @nest .dark-mode & {
+    .dark-mode & {
         color: white;
         background: black; 
     }
@@ -94,7 +94,7 @@ table.colortable, table.stripe {
         &.c { text-transform:uppercase }
         &:first-child, &:first-child + td { border:1px solid black }
     }
-    & th {
+    > th {
         text-align:center;
         background:black;
         color:white;
@@ -164,7 +164,7 @@ table.stripe {
 	border: 1px solid black
 }
 
- :is(table.colortable, table.stripe) th {
+ :is(table.colortable, table.stripe) > th {
 	text-align: center;
 	background: black;
 	color: white
@@ -197,25 +197,6 @@ table.stripe {
 ```
 
 ## What it doesn't support
-### Error handling: Garbage in - Garbage out
-
-If you provide 
-
-```css
-/* No & at all! */
-.foo {
-  color: blue;
-  .bar {
-    color: red;
-  }
-}
-```
-
-it will return a broken css looking like this:
-
-```css
-.foo { color: blue;.bar {    color: red }
-```
 
 ### No clean key generation
 

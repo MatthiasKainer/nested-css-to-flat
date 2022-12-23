@@ -11,7 +11,7 @@ export const flatten = (data, parent = "") => {
             //  so it's more accidentaly. Remove it without taking action
             key = key.replace(/\@nest/gi, "")
             // Add a leading & if the key is a class, and no & present
-            if (parent !== "" && key.startsWith(".") && !key.includes("&")) {
+            if (parent !== "" && [".", ":", ">"].some(c => key.startsWith(c)) && !key.includes("&")) {
                 key = "& " + key;
             }
             // Replace any occurence of & with the parent in the key

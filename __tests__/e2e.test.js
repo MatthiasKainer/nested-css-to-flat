@@ -155,7 +155,7 @@ describe("e2e", () => {
     figure {
       margin: 0;
     
-      & > figcaption {
+      > figcaption {
         background: hsl(0 0% 0% / 50%);
     
         & > p {

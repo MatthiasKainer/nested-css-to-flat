@@ -28,6 +28,11 @@ describe("Flattener", () => {
         expect(flatten(tree)).toEqual("table.colortable {  } table.colortable .cell { text-align:center }")
     })
 
+    it("flattens a nested element without a & correctly", () => {
+        const tree = { "table.colortable": [{".cell": ["text-align:center"]}] }
+        expect(flatten(tree)).toEqual("table.colortable {  } table.colortable .cell { text-align:center }")
+    })
+
     it("flattens a trailing & correctly", () => {
         const tree = { "table.colortable": [{".cell &": ["text-align:center"]}] }
         expect(flatten(tree)).toEqual("table.colortable {  } .cell table.colortable { text-align:center }")
