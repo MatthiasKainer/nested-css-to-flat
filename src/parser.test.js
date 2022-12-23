@@ -8,6 +8,41 @@ describe("parser", () => {
         expect(parseNode("@charset \"utf-8\"; table.colortable td { text-align:center; }").node).toEqual({ "@charset \"utf-8\"": undefined, "table.colortable td": ["text-align:center"] })
     })
 
+    it("can work with & in the front", () => {
+        expect(parseNode(`
+        table.colortable {
+            & .cell { 
+                text-align:center; 
+            }
+        }`).node).toEqual({ "table.colortable": [{"& .cell": ["text-align:center"]}] })
+    })
+
+    it("can work with & in the back", () => {
+        expect(parseNode(`
+        table.colortable {
+            .cell & { 
+                text-align:center; 
+            }
+        }`).node).toEqual({ "table.colortable": [{".cell &": ["text-align:center"]}] })
+    })
+
+    it("also works with the & in the back for an element, with an :is selector", () => {
+        expect(parseNode(`table.colortable {
+            :is(td) & {
+                text-align:center; 
+            }
+          }`).node).toEqual({ "table.colortable": [{":is(td) &": ["text-align:center"]}] })
+    })
+
+    it("can work without &", () => {
+        expect(parseNode(`
+        table.colortable {
+            .cell { 
+                text-align:center; 
+            }
+        }`).node).toEqual({ "table.colortable": [{".cell":["text-align:center"]}] })
+    })
+
     it("can handle complex at-rules", () => {
         /*  */
         const { node } = parseNode(`

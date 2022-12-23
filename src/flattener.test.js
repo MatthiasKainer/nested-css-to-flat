@@ -18,6 +18,26 @@ describe("Flattener", () => {
         expect(flatten(tree)).toEqual("table.colortable td { text-align:center } table.colortable th { text-align:center;background:black;color:white }")
     })
 
+    it("flattens a leading & correctly", () => {
+        const tree = { "table.colortable": [{"& .cell": ["text-align:center"]}] }
+        expect(flatten(tree)).toEqual("table.colortable {  } table.colortable .cell { text-align:center }")
+    })
+
+    it("flattens a class without a & correctly", () => {
+        const tree = { "table.colortable": [{".cell": ["text-align:center"]}] }
+        expect(flatten(tree)).toEqual("table.colortable {  } table.colortable .cell { text-align:center }")
+    })
+
+    it("flattens a trailing & correctly", () => {
+        const tree = { "table.colortable": [{".cell &": ["text-align:center"]}] }
+        expect(flatten(tree)).toEqual("table.colortable {  } .cell table.colortable { text-align:center }")
+    })
+
+    it("flattens a trailing & correctly, also with the deprecated @nest statement", () => {
+        const tree = { "table.colortable": [{"@nest .cell &": ["text-align:center"]}] }
+        expect(flatten(tree)).toEqual("table.colortable {  } .cell table.colortable { text-align:center }")
+    })
+
     it("flattens a nested file correctly", () => {
         const tree = {
             "table.colortable": [

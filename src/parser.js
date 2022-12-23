@@ -26,6 +26,12 @@ export const parseElement = (value, level = 1) => {
             const { node, endIndex } = parseNode(value.substr(index), level + 1)
             val.push(node)
             index += endIndex;
+        } else if ((element === "." || element === ":") && currentVal.trim() === "") {
+            // if this is a nested class/selector, or a :-selected element, parse
+            //  as a nested node
+            const { node, endIndex } = parseNode(value.substr(index-1), level + 1)
+            val.push(node)
+            index += endIndex;
         } else if (element === "}") {
             if (currentVal.trim() !== "") {
                 val.push(currentVal.trim());

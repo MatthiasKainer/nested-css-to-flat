@@ -181,3 +181,65 @@ describe("e2e", () => {
   }`)).toMatchInlineSnapshot(`".foo { color: blue } .foo__bar { color: red }"`)
   })
 })
+
+describe("examples from https://webkit.org/blog/13607/help-choose-from-options-for-css-nesting-syntax/", () => {
+  it.each([
+    [
+      `.foo {
+        color: red;
+        .bar {
+          color: blue;
+        }
+        & p {
+          color: yellow;
+        }
+      }`,
+      `.foo { color: red } .foo .bar { color: blue } .foo p { color: yellow }`
+    ],
+    [
+      `.foo {
+        color: red;
+        & .bar {
+          color: blue;
+        }
+        & p {
+          color: yellow;
+        }
+      }`,
+      `.foo { color: red } .foo .bar { color: blue } .foo p { color: yellow }`
+    ],
+    [
+      `a:hover {
+        color: hotpink;
+        :is(aside) & {
+          color: red;
+        }
+      }`,
+      `a:hover { color: hotpink } :is(aside) a:hover { color: red }`
+    ],
+    [
+      `ol, ul {
+        padding-left: 1em;
+        @media (max-width: 30em){
+          .type & {
+            padding-left: 0;
+          }
+        }
+      }`,
+      // in the given example, it creates ".type ul, .type ol", however the :is is leading to the same result
+      `ol, ul { padding-left: 1em } @media (max-width: 30em) { .type :is(ol, ul) { padding-left: 0 } }`
+    ],
+    [
+      `:has(img) { 
+        :is(a&) {
+          border: none;
+        }
+      }`,
+      // now keeping the :is works, but the result might be clearer if we clean that up
+      `:has(img) {  } :is(a:has(img)) { border: none }`
+    ]
+  ]
+  )("transforms %s to %s", (from, to) => {
+    expect(transform(from)).toEqual(to)
+  })
+})
